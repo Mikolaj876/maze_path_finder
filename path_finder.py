@@ -33,7 +33,7 @@ class Path():
         return func
 
     def ret_value_at(self, grid, x, y):
-        if (y <= len(grid) - 1) and (x < len(grid[y])):
+        if (x,y) in self.in_bounds_list:
             return grid[y][x]
 
         else:
@@ -56,7 +56,7 @@ class Path():
             mot_y += mov[1]
 
             if (mot_x, mot_y) in self.in_bounds_list and self.ret_value_at(self.grid, mot_x, mot_y) != 1:
-                open_neighbours.append((mot_x, mot_y))
+                open_neighbours.append((mot_x, mot_y))  
 
         return open_neighbours
 

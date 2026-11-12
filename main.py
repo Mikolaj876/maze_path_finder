@@ -21,17 +21,17 @@ class Game():
         self.path = Path(self.start, self.end)
         self.square_size = 100
 
-        self.path.grid = [  [0, 0, 1, 1, 1, 1, 1, 1], # 0 is empty, 1 - wall, 2 - start, 3 - end
-                            [1, 0, 0, 0, 0, 0, 0, 1],
-                            [1, 1, 1, 1, 1, 1, 0, 1],
-                            [1, 0, 0, 0, 0, 1, 0, 1],
-                            [1, 0, 1, 1, 0, 1, 0, 1],
-                            [1, 0, 0, 1, 0, 0, 0, 1],
-                            [1, 1, 0, 1, 1, 1, 0, 0],
-                            [1, 1, 1, 1, 1, 1, 1, 0],
-                            [0, 0, 1, 1, 1, 1, 1, 1]]
+        self.grid = [
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0, 1, 0],
+            [0, 1, 1, 1, 1, 0, 1, 0],
+            [0, 1, 0, 0, 1, 0, 1, 0],
+            [0, 1, 0, 1, 1, 0, 1, 0],
+            [0, 1, 0, 0, 0, 0, 1, 0],
+            [0, 1, 1, 1, 1, 1, 1, 0],
+        ]
 
-        self.grid = self.path.grid
         self.grid[self.end[1]][self.end[0]] = 3
         self.grid[self.start[1]][self.start[0]] = 2
         self.screen_x = len(self.grid[0]) * self.square_size
@@ -42,12 +42,13 @@ class Game():
 
         self.bot = Bot()
 
+        self.path.grid = self.grid
         self.path_actual = self.path.shortest_path()
         self.indx = 0
         self.clock = pygame.Clock()
 
 
-        self.fps = 10
+        self.fps = 5
     
     def run(self):
         while self.running:
